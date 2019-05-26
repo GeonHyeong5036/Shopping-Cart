@@ -1,15 +1,17 @@
 package com.sss.shoppingcart.Model;
 
 public class Store {
-    private String Name;
-    private String Image;
+    private String Name, Image, PhoneNumber, Cook, Address;
 
     public Store() {
     }
 
-    public Store(String name, String image) {
+    public Store(String name, String image, String phoneNumber, String cook, String address) {
         Name = name;
         Image = image;
+        PhoneNumber = phoneNumber;
+        Cook = cook;
+        Address = address;
     }
 
     public String getName() {
@@ -26,5 +28,29 @@ public class Store {
 
     public void setImage(String image) {
         Image = image;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        PhoneNumber = phoneNumber;
+    }
+
+    public String getCook() {
+        return Cook;
+    }
+
+    public void setCook(String cook) {
+        Cook = cook;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 }

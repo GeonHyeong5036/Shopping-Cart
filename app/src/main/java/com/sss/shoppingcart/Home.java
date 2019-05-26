@@ -1,5 +1,6 @@
 package com.sss.shoppingcart;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,6 +38,8 @@ public class Home extends AppCompatActivity
 
     RecyclerView recyclerView_menu;
     RecyclerView.LayoutManager layoutManager;
+
+    FirebaseRecyclerAdapter<Store, MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class Home extends AppCompatActivity
     }
 
     private void loadMenu() {
-        FirebaseRecyclerAdapter<Store, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Store, MenuViewHolder>(Store.class, R.layout.menu_item, MenuViewHolder.class, store) {
+        adapter = new FirebaseRecyclerAdapter<Store, MenuViewHolder>(Store.class, R.layout.menu_item, MenuViewHolder.class, store) {
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Store model, int position) {
                 viewHolder.txtMenuName.setText(model.getName());
@@ -95,7 +98,11 @@ public class Home extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+ clickitem.getName(), Toast.LENGTH_SHORT).show();
+                        //Get StoreId and send to new activity
+                        Intent foodList = new Intent(Home.this, FoodList.class);
+                        //Beacuse StoreId is key, so we just get key of this item
+                        foodList.putExtra("StoreId", adapter.getRef(position).getKey());
+                        startActivity(foodList);
                     }
                 });
             }
