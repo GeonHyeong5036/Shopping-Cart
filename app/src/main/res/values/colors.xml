@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#00251a</color>
     <color name="colorAccent">#39796b</color>
 
+    <color name = "overlayBackground">#7f8c8d98</color>
+    <color name = "overlayActionBar">#0e0d0e</color>
+
+
     <color name="btnSignUp">#39796b</color>
     <color name="btnSignActive">#A9d440</color>
     <color name="fbutton_default_color">#3eadeb</color>

@@ -17,11 +17,10 @@
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPhone"
-            android:hint="Phone Number"
+            android:hint="Phone Number(01098666577)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="0988123388"
             android:textColor="@android:color/white"
             android:textSize="34dp"
             android:inputType="phone"
@@ -34,7 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="Kim"
             android:textColor="@android:color/white"
             android:textSize="34dp"
             android:inputType="phone"
@@ -47,7 +45,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@android:color/white"
-            android:text="1234"
             android:textColor="@android:color/white"
             android:textSize="34dp"
             android:inputType="textPassword"
