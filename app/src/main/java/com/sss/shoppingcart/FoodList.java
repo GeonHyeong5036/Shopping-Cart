@@ -39,7 +39,7 @@ public class FoodList extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         foodList = database.getReference("Foods");
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_food);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_food );
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -67,7 +67,9 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(FoodList.this, ""+local.getName(), Toast.LENGTH_SHORT).show();
+                        Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
+                        foodDetail.putExtra("FoodId", adapter.getRef(position).getKey());
+                        startActivity(foodDetail);
                     }
                 });
             }

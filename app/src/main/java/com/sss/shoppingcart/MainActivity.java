@@ -11,44 +11,44 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnSignIn, btnSignUp;
-    TextView txtSlogan;
+  Button btnSignIn, btnSignUp;
+  TextView txtSlogan;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-        btnSignIn = (Button)findViewById(R.id.btnSignIn);
-        btnSignUp = (Button)findViewById(R.id.btnSignUp);
+    btnSignIn = (Button)findViewById(R.id.btnSignIn);
+    btnSignUp = (Button)findViewById(R.id.btnSignUp);
 
-        txtSlogan = (TextView)findViewById(R.id.txtslogan);
+    txtSlogan = (TextView)findViewById(R.id.txtslogan);
 
-        btnSignIn.setOnClickListener(new View.OnClickListener(){
+    btnSignIn.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
+      @Override
+      public void onClick(View view) {
 
-            }
-        });
+      }
+    });
 
-        btnSignUp.setOnClickListener(new View.OnClickListener(){
+    btnSignUp.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
-                Intent signUp = new Intent(MainActivity.this, SignUp.class);
-                startActivity(signUp);
-            }
-        });
+      @Override
+      public void onClick(View view) {
+        Intent signUp = new Intent(MainActivity.this, SignUp.class);
+        startActivity(signUp);
+      }
+    });
 
-        btnSignIn.setOnClickListener(new View.OnClickListener(){
+    btnSignIn.setOnClickListener(new View.OnClickListener(){
 
-            @Override
-            public void onClick(View view) {
-                Intent signIn = new Intent(MainActivity.this, SignIn.class);
-                startActivity(signIn);
-            }
-        });
+      @Override
+      public void onClick(View view) {
+        Intent signIn = new Intent(MainActivity.this, SignIn.class);
+        startActivity(signIn);
+      }
+    });
 
-    }
+  }
 }

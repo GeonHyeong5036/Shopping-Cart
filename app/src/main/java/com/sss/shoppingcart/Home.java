@@ -100,7 +100,7 @@ public class Home extends AppCompatActivity
                     public void onClick(View view, int position, boolean isLongClick) {
                         //Get StoreId and send to new activity
                         Intent foodList = new Intent(Home.this, FoodList.class);
-                        //Beacuse StoreId is key, so we just get key of this item
+                        //Because StoreId is key, so we just get key of this item
                         foodList.putExtra("StoreId", adapter.getRef(position).getKey());
                         startActivity(foodList);
                     }
