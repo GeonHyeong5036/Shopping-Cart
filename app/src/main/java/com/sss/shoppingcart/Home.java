@@ -98,6 +98,11 @@ public class Home extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
+                        Toast.makeText(Home.this, "주소 : " + clickitem.getAddress()
+                                        +"\n전화번호 : " + clickitem.getPhoneNumber()
+                                        +"\n요리사 : "+ clickitem.getCook()
+                                        +"\n주소 : " + clickitem.getDescription()
+                                , Toast.LENGTH_SHORT).show();
                         //Get StoreId and send to new activity
                         Intent foodList = new Intent(Home.this, FoodList.class);
                         //Because StoreId is key, so we just get key of this item
@@ -143,7 +148,8 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
-
+            Intent cartIntent = new Intent(Home.this, Cart.class);
+            startActivity(cartIntent);
         } else if (id == R.id.nav_tools) {
 
         } else if (id == R.id.nav_log_out) {

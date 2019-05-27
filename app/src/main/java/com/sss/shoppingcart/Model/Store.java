@@ -1,14 +1,15 @@
 package com.sss.shoppingcart.Model;
 
 public class Store {
-    private String Name, Image, PhoneNumber, Cook, Address;
+    private String Name, Image, Description, PhoneNumber, Cook, Address;
 
     public Store() {
     }
 
-    public Store(String name, String image, String phoneNumber, String cook, String address) {
+    public Store(String name, String image, String description, String phoneNumber, String cook, String address) {
         Name = name;
         Image = image;
+        Description = description;
         PhoneNumber = phoneNumber;
         Cook = cook;
         Address = address;
@@ -52,5 +53,13 @@ public class Store {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 }

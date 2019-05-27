@@ -41,8 +41,6 @@ public class FoodDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_detail);
 
-//        Toast.makeText(FoodDetail.this, "good", Toast.LENGTH_SHORT).show();
-
         //Firebase
         database = FirebaseDatabase.getInstance();
         foods = database.getReference("Foods");
