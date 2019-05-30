@@ -3,7 +3,6 @@ package com.sss.shoppingcart;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,7 +27,7 @@ import com.sss.shoppingcart.Interface.ItemClickListener;
 import com.sss.shoppingcart.Model.Store;
 import com.sss.shoppingcart.ViewHolder.MenuViewHolder;
 
-public class Home extends AppCompatActivity
+public class StoreList extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase database;
@@ -47,7 +46,7 @@ public class Home extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu");
+        toolbar.setTitle("StoreList");
         setSupportActionBar(toolbar);
 
         //Init Firebase
@@ -58,7 +57,7 @@ public class Home extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent cartIntent = new Intent(Home.this,Cart.class);
+               Intent cartIntent = new Intent(StoreList.this,Cart.class);
                startActivity(cartIntent);
             }
         });
@@ -98,13 +97,13 @@ public class Home extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this, "주소 : " + clickitem.getAddress()
+                        Toast.makeText(StoreList.this, "주소 : " + clickitem.getAddress()
                                         +"\n전화번호 : " + clickitem.getPhoneNumber()
                                         +"\n요리사 : "+ clickitem.getCook()
                                         +"\n주소 : " + clickitem.getDescription()
                                 , Toast.LENGTH_SHORT).show();
                         //Get StoreId and send to new activity
-                        Intent foodList = new Intent(Home.this, FoodList.class);
+                        Intent foodList = new Intent(StoreList.this, FoodList.class);
                         //Because StoreId is key, so we just get key of this item
                         foodList.putExtra("StoreId", adapter.getRef(position).getKey());
                         startActivity(foodList);
@@ -148,7 +147,7 @@ public class Home extends AppCompatActivity
         if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
-            Intent cartIntent = new Intent(Home.this, Cart.class);
+            Intent cartIntent = new Intent(StoreList.this, Cart.class);
             startActivity(cartIntent);
         } else if (id == R.id.nav_tools) {
 

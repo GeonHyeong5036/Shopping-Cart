@@ -58,8 +58,11 @@ public class FoodDetail extends AppCompatActivity {
                         numberButton.getNumber(),
                         currentFood.getPrice()
                 ));
-                Toast.makeText(FoodDetail.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                int total = 0;
+                for(Select select:new Database(getBaseContext()).getCart())
+                    total += (Integer.parseInt(select.getPrice()))*(Integer.parseInt(select.getQuantity()));
 
+                Toast.makeText(FoodDetail.this, "장바구니를 확인해주세요\n현재 total : "+ total, Toast.LENGTH_SHORT).show();
             }
         });
 

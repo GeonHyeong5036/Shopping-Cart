@@ -27,8 +27,8 @@ public class Cart extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
 
-    FirebaseDatabase database;
-    DatabaseReference request;
+//    FirebaseDatabase database;
+//    DatabaseReference request;
 
     TextView txtTotalPrice;
     FButton btnPlace;
@@ -37,14 +37,16 @@ public class Cart extends AppCompatActivity {
 
     CartAdapter adapter;
 
+    private int total;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        //Firebase
-        database = FirebaseDatabase.getInstance();
-        request = database.getReference("Requests");
+//        //Firebase
+//        database = FirebaseDatabase.getInstance();
+//        request = database.getReference("Requests");
 
         recyclerView = (RecyclerView) findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
@@ -90,6 +92,12 @@ public class Cart extends AppCompatActivity {
         Locale locale = new Locale("en", "US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
+        setTotal(total);
+
         txtTotalPrice.setText(fmt.format(total));
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }
