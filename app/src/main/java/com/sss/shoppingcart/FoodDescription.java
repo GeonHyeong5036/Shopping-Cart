@@ -17,11 +17,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.sss.shoppingcart.Database.Database;
+import com.sss.shoppingcart.Database.Register;
 import com.sss.shoppingcart.Model.Food;
-import com.sss.shoppingcart.Model.Select;
+import com.sss.shoppingcart.Model.LineItem;
 
-public class FoodDetail extends AppCompatActivity {
+public class FoodDescription extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference foods;
@@ -51,18 +51,18 @@ public class FoodDetail extends AppCompatActivity {
 
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                new Database(getBaseContext()).addToCart(new Select(
+            public void onClick(View v) { //selectOrder(foodID, foodName, price, quantity)
+                new Register(getBaseContext()).addToCart(new LineItem(
                         foodId,
                         currentFood.getName(),
                         numberButton.getNumber(),
                         currentFood.getPrice()
                 ));
                 int total = 0;
-                for(Select select:new Database(getBaseContext()).getCart())
-                    total += (Integer.parseInt(select.getPrice()))*(Integer.parseInt(select.getQuantity()));
+                for(LineItem lineItem :new Register(getBaseContext()).getOrderForm())
+                    total += (Integer.parseInt(lineItem.getPrice()))*(Integer.parseInt(lineItem.getQuantity()));
 
-                Toast.makeText(FoodDetail.this, "장바구니를 확인해주세요\n현재 total : "+ total, Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodDescription.this, "장바구니를 확인해주세요\n현재 total : "+ total, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -80,11 +80,11 @@ public class FoodDetail extends AppCompatActivity {
         if(getIntent() != null)
             foodId = getIntent().getStringExtra("FoodId");
         if(!foodId.isEmpty()){
-            getDetailFood(foodId);
+            selectFood(foodId);
         }
     }
 
-    private void getDetailFood(String foodId) {
+    private void selectFood(String foodId) {
         foods.child(foodId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

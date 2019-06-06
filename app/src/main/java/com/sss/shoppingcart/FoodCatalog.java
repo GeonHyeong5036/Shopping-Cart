@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -16,10 +13,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.sss.shoppingcart.Interface.ItemClickListener;
 import com.sss.shoppingcart.Model.Food;
-import com.sss.shoppingcart.Model.Store;
 import com.sss.shoppingcart.ViewHolder.FoodViewHolder;
 
-public class FoodList extends AppCompatActivity {
+public class FoodCatalog extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference foodList;
 
@@ -48,11 +44,11 @@ public class FoodList extends AppCompatActivity {
         if(getIntent() != null)
             storeId = getIntent().getStringExtra("StoreId");
         if(!storeId.isEmpty() && storeId != null){
-            loadListFood(storeId);
+            selectStore(storeId);
         }
     }
 
-    private void loadListFood(String storeId) {
+    private void selectStore(String storeId) {
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
@@ -67,9 +63,9 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent foodDetail = new Intent(FoodList.this, FoodDetail.class);
-                        foodDetail.putExtra("FoodId", adapter.getRef(position).getKey());
-                        startActivity(foodDetail);
+                        Intent selectFood = new Intent(FoodCatalog.this, FoodDescription.class);
+                        selectFood.putExtra("FoodId", adapter.getRef(position).getKey());
+                        startActivity(selectFood);
                     }
                 });
             }

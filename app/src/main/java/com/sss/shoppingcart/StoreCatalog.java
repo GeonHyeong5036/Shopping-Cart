@@ -27,7 +27,7 @@ import com.sss.shoppingcart.Interface.ItemClickListener;
 import com.sss.shoppingcart.Model.Store;
 import com.sss.shoppingcart.ViewHolder.MenuViewHolder;
 
-public class StoreList extends AppCompatActivity
+public class StoreCatalog extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseDatabase database;
@@ -46,7 +46,7 @@ public class StoreList extends AppCompatActivity
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("StoreList");
+        toolbar.setTitle("StoreCatalog");
         setSupportActionBar(toolbar);
 
         //Init Firebase
@@ -57,7 +57,7 @@ public class StoreList extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent cartIntent = new Intent(StoreList.this,Cart.class);
+               Intent cartIntent = new Intent(StoreCatalog.this, OrderForm.class);
                startActivity(cartIntent);
             }
         });
@@ -73,7 +73,7 @@ public class StoreList extends AppCompatActivity
         //Set Name for user
         View headerView = navigationView.getHeaderView(0);
         txtFullName = (TextView) headerView.findViewById(R.id.txtFullName);
-        txtFullName.setText(Common.currentUser.getName());
+        txtFullName.setText(Common.currentCustomer.getName());
 
         //Load Menu
         recyclerView_menu = (RecyclerView) findViewById(R.id.recycler_menu);
@@ -81,14 +81,14 @@ public class StoreList extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         recyclerView_menu.setLayoutManager(layoutManager);
 
-        loadMenu();
+        makeNewOrderForm();
     }
 
-    private void loadMenu() {
+    private void makeNewOrderForm() {
         adapter = new FirebaseRecyclerAdapter<Store, MenuViewHolder>(Store.class, R.layout.menu_item, MenuViewHolder.class, store) {
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Store model, int position) {
-                viewHolder.txtMenuName.setText(model.getName());
+                viewHolder.txtMenuName.setText(model.getName()); //storeName
 
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.imageView);
 
@@ -97,16 +97,16 @@ public class StoreList extends AppCompatActivity
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(StoreList.this, "주소 : " + clickitem.getAddress()
+                        Toast.makeText(StoreCatalog.this, "주소 : " + clickitem.getAddress()
                                         +"\n전화번호 : " + clickitem.getPhoneNumber()
                                         +"\n요리사 : "+ clickitem.getCook()
                                         +"\n주소 : " + clickitem.getDescription()
                                 , Toast.LENGTH_SHORT).show();
                         //Get StoreId and send to new activity
-                        Intent foodList = new Intent(StoreList.this, FoodList.class);
+                        Intent selectStore = new Intent(StoreCatalog.this, FoodCatalog.class);
                         //Because StoreId is key, so we just get key of this item
-                        foodList.putExtra("StoreId", adapter.getRef(position).getKey());
-                        startActivity(foodList);
+                        selectStore.putExtra("StoreId", adapter.getRef(position).getKey()); //selectStore(storeId)
+                        startActivity(selectStore);
                     }
                 });
             }
@@ -147,7 +147,7 @@ public class StoreList extends AppCompatActivity
         if (id == R.id.nav_menu) {
             // Handle the camera action
         } else if (id == R.id.nav_cart) {
-            Intent cartIntent = new Intent(StoreList.this, Cart.class);
+            Intent cartIntent = new Intent(StoreCatalog.this, OrderForm.class);
             startActivity(cartIntent);
         } else if (id == R.id.nav_tools) {
 

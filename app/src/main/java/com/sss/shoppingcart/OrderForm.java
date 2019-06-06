@@ -9,11 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.sss.shoppingcart.Database.Database;
-import com.sss.shoppingcart.Model.Select;
-import com.sss.shoppingcart.ViewHolder.CartAdapter;
+import com.sss.shoppingcart.Database.Register;
+import com.sss.shoppingcart.Model.LineItem;
+import com.sss.shoppingcart.ViewHolder.OrderFormAdapter;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import java.util.Locale;
 
 import info.hoang8f.widget.FButton;
 
-public class Cart extends AppCompatActivity {
+public class OrderForm extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
@@ -33,9 +31,9 @@ public class Cart extends AppCompatActivity {
     TextView txtTotalPrice;
     FButton btnPlace;
 
-    List<Select> cart = new ArrayList<>();
+    List<LineItem> selectFoodList = new ArrayList<>();
 
-    CartAdapter adapter;
+    OrderFormAdapter adapter;
 
     private int total;
 
@@ -43,10 +41,6 @@ public class Cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
-//        //Firebase
-//        database = FirebaseDatabase.getInstance();
-//        request = database.getReference("Requests");
 
         recyclerView = (RecyclerView) findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
@@ -63,32 +57,32 @@ public class Cart extends AppCompatActivity {
             }
         });
 
-        loadListFood();
+        decideOrder();
     }
 
     private void showAlertDialog(){
-        AlertDialog.Builder alerDialog = new AlertDialog.Builder(Cart.this);
+        AlertDialog.Builder alerDialog = new AlertDialog.Builder(OrderForm.this);
         alerDialog.setTitle("주문하겠습니까?");
         alerDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
         alerDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                new Database(getBaseContext()).clearCart();
+                new Register(getBaseContext()).clearCart();
                 finish();
             }
         });
         alerDialog.show();
     }
 
-    private void loadListFood() {
-        cart = new Database(this).getCart();
-        adapter = new CartAdapter(cart, this);
+    private void decideOrder() {
+        selectFoodList = new Register(this).getOrderForm();
+        adapter = new OrderFormAdapter(selectFoodList, this); //decideOrder
         recyclerView.setAdapter(adapter);
 
         //Calculate total price
         int total = 0;
-        for(Select select:cart)
-            total += (Integer.parseInt(select.getPrice()))*(Integer.parseInt(select.getQuantity()));
+        for(LineItem lineItem :selectFoodList)
+            total += (Integer.parseInt(lineItem.getPrice()))*(Integer.parseInt(lineItem.getQuantity()));
         Locale locale = new Locale("en", "US");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 

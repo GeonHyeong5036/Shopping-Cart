@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.sss.shoppingcart.Common.Common;
-import com.sss.shoppingcart.Model.User;
+import com.sss.shoppingcart.Model.Customer;
 
 public class SignIn extends AppCompatActivity {
     EditText edtPhone, edtPassword;
@@ -34,7 +34,7 @@ public class SignIn extends AppCompatActivity {
 
         //init FireBase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
+        final DatabaseReference table_user = database.getReference("Customer");
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,14 +48,14 @@ public class SignIn extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Check if user not exist in database
                         if(dataSnapshot.child(edtPhone.getText().toString()).exists()){
-                            //Get User information
+                            //Get Customer information
                             mDialog.dismiss();
-                            User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                            Customer customer = dataSnapshot.child(edtPhone.getText().toString()).getValue(Customer.class);
 
-                            if (user.getPassword().equals((edtPassword.getText().toString()))) {
-                                Intent homeIntent = new Intent(SignIn.this, StoreList.class);
-                                Common.currentUser = user;
-                                startActivity(homeIntent);
+                            if (customer.getPassword().equals((edtPassword.getText().toString()))) {
+                                Intent storeList = new Intent(SignIn.this, StoreCatalog.class);
+                                Common.currentCustomer = customer;
+                                startActivity(storeList);
                                 finish();
 
                             }else{
@@ -63,7 +63,7 @@ public class SignIn extends AppCompatActivity {
                             }
                         }else{
                             mDialog.dismiss();
-                            Toast.makeText(SignIn.this, "User not exist in DataBase", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignIn.this, "Customer not exist in DataBase", Toast.LENGTH_SHORT).show();
                         }
 
 

@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.sss.shoppingcart.Model.User;
+import com.sss.shoppingcart.Model.Customer;
 
 public class SignUp extends AppCompatActivity {
 
@@ -34,7 +34,7 @@ public class SignUp extends AppCompatActivity {
 
         //init FireBase
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
+        final DatabaseReference table_user = database.getReference("Customer");
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,8 +52,8 @@ public class SignUp extends AppCompatActivity {
                             Toast.makeText(SignUp.this, "Phone Number Already register", Toast.LENGTH_SHORT).show();
                         }else{
                             mDialog.dismiss();
-                            User user = new User(edtName.getText().toString(), edtPassword.getText().toString());
-                            table_user.child(edtPhone.getText().toString()).setValue(user);
+                            Customer customer = new Customer(edtName.getText().toString(), edtPassword.getText().toString());
+                            table_user.child(edtPhone.getText().toString()).setValue(customer);
                             Toast.makeText(SignUp.this, "Sign up successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         }

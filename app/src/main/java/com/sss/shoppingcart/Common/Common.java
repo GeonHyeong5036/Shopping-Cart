@@ -1,7 +1,7 @@
 package com.sss.shoppingcart.Common;
 
-import com.sss.shoppingcart.Model.User;
+import com.sss.shoppingcart.Model.Customer;
 
 public class Common {
-    public  static User currentUser;
+    public  static Customer currentCustomer;
 }

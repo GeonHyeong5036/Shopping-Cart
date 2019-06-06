@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Cart"></activity>
-        <activity android:name=".FoodDetail" />
-        <activity android:name=".FoodList" />
+        <activity android:name=".OrderForm"></activity>
+        <activity android:name=".FoodDescription" />
+        <activity android:name=".FoodCatalog" />
         <activity
-            android:name=".StoreList"
+            android:name=".StoreCatalog"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUp" />

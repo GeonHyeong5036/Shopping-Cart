@@ -1,13 +1,13 @@
 package com.sss.shoppingcart.Model;
 
-public class User {
+public class Customer {
     private String name;
     private String Password;
 
-    public User() {
+    public Customer() {
     }
 
-    public User(String name, String password) {
+    public Customer(String name, String password) {
         this.name = name;
         Password = password;
     }
